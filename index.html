@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vocabulary Spelling Adventure</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .game-container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 700px;
+            width: 100%;
+            padding: 40px;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            color: #667eea;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .score-board {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            padding: 15px;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            border-radius: 10px;
+            color: white;
+            font-weight: bold;
+        }
+
+        .word-display {
+            text-align: center;
+            margin-bottom: 20px;
+            padding: 25px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            min-height: 180px;
+        }
+
+        .meaning-clue {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+
+        .meaning-text {
+            color: #2c3e50;
+            font-size: 1.2em;
+            font-weight: 500;
+            line-height: 1.5;
+        }
+
+        .letter-clue {
+            font-family: 'Courier New', monospace;
+            font-size: 2em;
+            color: #667eea;
+            margin: 20px 0;
+            letter-spacing: 8px;
+            font-weight: bold;
+        }
+
+        .letter-box {
+            display: inline-block;
+            width: 35px;
+            height: 40px;
+            line-height: 40px;
+            margin: 0 3px;
+            border-bottom: 3px solid #667eea;
+            text-align: center;
+            color: #764ba2;
+            font-weight: bold;
+        }
+
+        .info-text {
+            color: #6c757d;
+            font-size: 0.95em;
+            margin-top: 10px;
+        }
+
+        .input-section {
+            margin-bottom: 20px;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 15px;
+            font-size: 1.3em;
+            border: 3px solid #e0e0e0;
+            border-radius: 10px;
+            transition: all 0.3s;
+            text-transform: lowercase;
+            letter-spacing: 2px;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        button {
+            flex: 1;
+            padding: 12px 24px;
+            font-size: 1.1em;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .submit-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .hint-btn {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+        }
+
+        .hint-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(240, 147, 251, 0.3);
+        }
+
+        .skip-btn {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            color: white;
+        }
+
+        .skip-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(250, 112, 154, 0.3);
+        }
+
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .feedback {
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            margin-bottom: 20px;
+            font-weight: bold;
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .feedback.correct {
+            background: #d4edda;
+            color: #155724;
+            border: 2px solid #c3e6cb;
+        }
+
+        .feedback.incorrect {
+            background: #f8d7da;
+            color: #721c24;
+            border: 2px solid #f5c6cb;
+        }
+
+        .stars {
+            font-size: 2em;
+            color: gold;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            animation: bounce 0.5s;
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.2);
+            }
+        }
+
+        .game-over {
+            text-align: center;
+            padding: 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 15px;
+        }
+
+        .game-over h2 {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+
+        .restart-btn {
+            background: white;
+            color: #667eea;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            margin-top: 20px;
+        }
+
+        .restart-btn:hover {
+            background: #f8f9fa;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .hint-reveal {
+            color: #e74c3c;
+            font-weight: bold;
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.6;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <h1>🎯 Spelling Adventure 🎯</h1>
+        
+        <div class="score-board">
+            <div>Score: <span id="score">0</span></div>
+            <div>Words Left: <span id="wordsLeft">15</span></div>
+            <div>Hints Used: <span id="hintsUsed">0</span></div>
+        </div>
+
+        <div id="gameArea">
+            <div class="word-display">
+                <div class="meaning-clue">
+                    <div style="font-size: 1.1em; color: #5f6368; margin-bottom: 10px;">
+                        📖 Definition:
+                    </div>
+                    <div id="meaningText" class="meaning-text"></div>
+                </div>
+                
+                <div id="letterClue" class="letter-clue"></div>
+                
+                <div id="infoText" class="info-text"></div>
+            </div>
+
+            <div id="feedback" class="feedback hidden"></div>
+
+            <div class="input-section">
+                <input type="text" id="spellingInput" placeholder="Type your spelling here..." autocomplete="off">
+            </div>
+
+            <div class="button-group">
+                <button id="submitBtn" class="submit-btn" onclick="checkSpelling()">Check Spelling</button>
+                <button id="hintBtn" class="hint-btn" onclick="showHint()">Get More Letters</button>
+                <button class="skip-btn" onclick="skipWord()">Skip Word</button>
+            </div>
+        </div>
+
+        <div id="gameOver" class="game-over hidden">
+            <h2>🎉 Great Job! 🎉</h2>
+            <div class="stars" id="stars"></div>
+            <p id="finalScore"></p>
+            <p id="performance"></p>
+            <button class="restart-btn" onclick="restartGame()">Play Again</button>
+        </div>
+    </div>
+
+    <script>
+        // Game state management
+        const GameState = {
+            words: [
+                { 
+                    word: 'furrowed', 
+                    meaning: 'With deep lines or wrinkles, especially on the forehead when worried or thinking',
+                    initialLetters: [0, 4] // Show 'f' and 'o'
+                },
+                { 
+                    word: 'sinister', 
+                    meaning: 'Evil or harmful; suggesting something bad will happen',
+                    initialLetters: [0, 5] // Show 's' and 't'
+                },
+                { 
+                    word: 'unfurling', 
+                    meaning: 'Opening or spreading out from a rolled or folded position',
+                    initialLetters: [0, 3] // Show 'u' and 'u'
+                },
+                { 
+                    word: 'exhale', 
+                    meaning: 'To breathe out',
+                    initialLetters: [0, 3] // Show 'e' and 'a'
+                },
+                { 
+                    word: 'pang', 
+                    meaning: 'A sudden sharp feeling of pain or emotion',
+                    initialLetters: [0, 2] // Show 'p' and 'n'
+                },
+                { 
+                    word: 'jummah', 
+                    meaning: 'The Friday prayer service in Islam; Muslim day of congregational prayer',
+                    initialLetters: [0, 3] // Show 'j' and 'm'
+                },
+                { 
+                    word: 'dispel', 
+                    meaning: 'To make something disappear or go away, especially a belief or feeling',
+                    initialLetters: [0, 3] // Show 'd' and 'p'
+                },
+                { 
+                    word: 'foyer', 
+                    meaning: 'An entrance hall or lobby in a building',
+                    initialLetters: [0, 2] // Show 'f' and 'y'
+                },
+                { 
+                    word: 'smirk', 
+                    meaning: 'A smug, conceited, or silly smile',
+                    initialLetters: [0, 3] // Show 's' and 'r'
+                },
+                { 
+                    word: 'devour', 
+                    meaning: 'To eat something quickly and hungrily; to consume eagerly',
+                    initialLetters: [0, 3] // Show 'd' and 'o'
+                },
+                { 
+                    word: 'wafting', 
+                    meaning: 'Moving gently through the air; carrying on the breeze',
+                    initialLetters: [0, 3] // Show 'w' and 't'
+                },
+                { 
+                    word: 'omniscient', 
+                    meaning: 'Knowing everything; having unlimited knowledge',
+                    initialLetters: [0, 5] // Show 'o' and 'c'
+                },
+                { 
+                    word: 'drab', 
+                    meaning: 'Dull and lacking brightness or interest; dreary',
+                    initialLetters: [0, 2] // Show 'd' and 'a'
+                },
+                { 
+                    word: 'stifle', 
+                    meaning: 'To stop something from happening or developing; to suppress',
+                    initialLetters: [0, 3] // Show 's' and 'f'
+                },
+                { 
+                    word: 'pungent', 
+                    meaning: 'Having a strong, sharp smell or taste',
+                    initialLetters: [0, 3] // Show 'p' and 'g'
+                }
+            ],
+            currentWordIndex: 0,
+            score: 0,
+            hintsUsed: 0,
+            revealedLetters: [],
+            wordAttempts: 0,
+            shuffledWords: [],
+            maxHints: 3
+        };
+
+        // Initialize game on load
+        window.onload = function() {
+            initializeGame();
+        };
+
+        function initializeGame() {
+            // Shuffle words for variety
+            GameState.shuffledWords = [...GameState.words].sort(() => Math.random() - 0.5);
+            GameState.currentWordIndex = 0;
+            GameState.score = 0;
+            GameState.hintsUsed = 0;
+            
+            updateUI();
+            presentNewWord();
+        }
+
+        function presentNewWord() {
+            if (GameState.currentWordIndex >= GameState.shuffledWords.length) {
+                endGame();
+                return;
+            }
+
+            const currentWordObj = GameState.shuffledWords[GameState.currentWordIndex];
+            GameState.wordAttempts = 0;
+            GameState.revealedLetters = [...currentWordObj.initialLetters];
+
+            // Clear previous feedback
+            document.getElementById('feedback').classList.add('hidden');
+            document.getElementById('spellingInput').value = '';
+            document.getElementById('hintBtn').disabled = false;
+
+            // Display meaning
+            document.getElementById('meaningText').textContent = currentWordObj.meaning;
+
+            // Display letter pattern with initial letters
+            updateLetterDisplay();
+
+            // Display info text
+            document.getElementById('infoText').textContent = 
+                `This word has ${currentWordObj.word.length} letters`;
+
+            // Focus input
+            document.getElementById('spellingInput').focus();
+        }
+
+        function updateLetterDisplay() {
+            const currentWordObj = GameState.shuffledWords[GameState.currentWordIndex];
+            const word = currentWordObj.word;
+            let display = '';
+
+            for (let i = 0; i < word.length; i++) {
+                if (GameState.revealedLetters.includes(i)) {
+                    display += `<span class="letter-box">${word[i].toUpperCase()}</span>`;
+                } else {
+                    display += `<span class="letter-box">_</span>`;
+                }
+            }
+
+            document.getElementById('letterClue').innerHTML = display;
+        }
+
+        function checkSpelling() {
+            const input = document.getElementById('spellingInput').value.trim().toLowerCase();
+            const currentWordObj = GameState.shuffledWords[GameState.currentWordIndex];
+            const currentWord = currentWordObj.word;
+            const feedbackEl = document.getElementById('feedback');
+
+            GameState.wordAttempts++;
+
+            if (input === currentWord) {
+                // Calculate points based on hints used for this word
+                const hintsForThisWord = GameState.revealedLetters.length - currentWordObj.initialLetters.length;
+                let points = Math.max(10 - hintsForThisWord * 2 - (GameState.wordAttempts - 1) * 2, 2);
+                GameState.score += points;
+                
+                feedbackEl.innerHTML = `
+                    <div class="stars">⭐</div>
+                    Excellent! You spelled "${currentWord}" correctly!
+                    <br>You earned ${points} points!
+                `;
+                feedbackEl.className = 'feedback correct';
+
+                setTimeout(() => {
+                    GameState.currentWordIndex++;
+                    updateUI();
+                    presentNewWord();
+                }, 2000);
+            } else {
+                // Incorrect answer
+                let message = `Not quite right. Try again!`;
+                
+                if (input.length !== currentWord.length) {
+                    message += `<br>Remember: the word has ${currentWord.length} letters.`;
+                }
+                
+                if (GameState.wordAttempts >= 2) {
+                    message += `<br>Hint: Click "Get More Letters" for help!`;
+                }
+                
+                feedbackEl.innerHTML = message;
+                feedbackEl.className = 'feedback incorrect';
+                
+                // Clear input for retry
+                document.getElementById('spellingInput').value = '';
+                document.getElementById('spellingInput').focus();
+            }
+        }
+
+        function showHint() {
+            const currentWordObj = GameState.shuffledWords[GameState.currentWordIndex];
+            const word = currentWordObj.word;
+            
+            // Find letters not yet revealed
+            const unrevealedIndices = [];
+            for (let i = 0; i < word.length; i++) {
+                if (!GameState.revealedLetters.includes(i)) {
+                    unrevealedIndices.push(i);
+                }
+            }
+
+            if (unrevealedIndices.length > 0) {
+                // Reveal one more letter
+                const randomIndex = unrevealedIndices[Math.floor(Math.random() * unrevealedIndices.length)];
+                GameState.revealedLetters.push(randomIndex);
+                GameState.hintsUsed++;
+                
+                updateLetterDisplay();
+                updateUI();
+
+                // Disable hint button if too many letters revealed (leave at least 2 unknown)
+                if (GameState.revealedLetters.length >= word.length - 2) {
+                    document.getElementById('hintBtn').disabled = true;
+                    document.getElementById('hintBtn').textContent = 'No more hints available';
+                }
+            }
+        }
+
+        function skipWord() {
+            const feedbackEl = document.getElementById('feedback');
+            const currentWordObj = GameState.shuffledWords[GameState.currentWordIndex];
+            
+            // Reveal all letters
+            GameState.revealedLetters = [];
+            for (let i = 0; i < currentWordObj.word.length; i++) {
+                GameState.revealedLetters.push(i);
+            }
+            updateLetterDisplay();
+            
+            feedbackEl.innerHTML = `
+                The word was: "<strong>${currentWordObj.word}</strong>"
+                <br>Keep practicing! You'll get it next time!
+            `;
+            feedbackEl.className = 'feedback incorrect';
+
+            setTimeout(() => {
+                GameState.currentWordIndex++;
+                updateUI();
+                presentNewWord();
+            }, 3000);
+        }
+
+        function updateUI() {
+            document.getElementById('score').textContent = GameState.score;
+            document.getElementById('wordsLeft').textContent = 
+                GameState.shuffledWords.length - GameState.currentWordIndex;
+            document.getElementById('hintsUsed').textContent = GameState.hintsUsed;
+        }
+
+        function endGame() {
+            document.getElementById('gameArea').classList.add('hidden');
+            document.getElementById('gameOver').classList.remove('hidden');
+
+            const percentage = (GameState.score / 70) * 100;
+            let stars = '';
+            let message = '';
+
+            if (percentage >= 90) {
+                stars = '⭐⭐⭐⭐⭐';
+                message = 'Outstanding! You\'re a spelling champion!';
+            } else if (percentage >= 70) {
+                stars = '⭐⭐⭐⭐';
+                message = 'Great job! You\'re doing really well!';
+            } else if (percentage >= 50) {
+                stars = '⭐⭐⭐';
+                message = 'Good effort! Keep practicing!';
+            } else {
+                stars = '⭐⭐';
+                message = 'Nice try! Practice makes perfect!';
+            }
+
+            document.getElementById('stars').textContent = stars;
+            document.getElementById('finalScore').textContent = 
+                `Final Score: ${GameState.score} points`;
+            document.getElementById('performance').textContent = message;
+        }
+
+        function restartGame() {
+            document.getElementById('gameArea').classList.remove('hidden');
+            document.getElementById('gameOver').classList.add('hidden');
+            initializeGame();
+        }
+
+        // Handle Enter key for submission
+        document.addEventListener('keypress', function(event) {
+            if (event.key === 'Enter' && !document.getElementById('gameArea').classList.contains('hidden')) {
+                checkSpelling();
+            }
+        });
+    </script>
+</body>
+</html>
