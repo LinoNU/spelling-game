@@ -281,7 +281,7 @@
         
         <div class="score-board">
             <div>Score: <span id="score">0</span></div>
-            <div>Words Left: <span id="wordsLeft">16</span></div>
+            <div>Words Left: <span id="wordsLeft">26</span></div>
             <div>Hints Used: <span id="hintsUsed">0</span></div>
         </div>
 
@@ -326,84 +326,134 @@
         const GameState = {
             words: [
                 { 
-                    word: 'snitch', 
-                    meaning: 'Someone who tells on others; to inform',
-                    initialLetters: [0, 3] // Show 's' and 't'
+                    word: 'wobbles', 
+                    meaning: 'Moves unsteadily from side to side',
+                    initialLetters: [0, 4] // Show 'w' and 'l'
                 },
                 { 
-                    word: 'gaze', 
-                    meaning: 'To look steadily and intently',
-                    initialLetters: [0, 2] // Show 'g' and 'z'
+                    word: 'exaggeration', 
+                    meaning: 'Making something seem more important or worse than it really is',
+                    initialLetters: [0, 6] // Show 'e' and 'r'
                 },
                 { 
-                    word: 'unnerved', 
-                    meaning: 'To make someone feel nervous or afraid',
-                    initialLetters: [0, 4] // Show 'u' and 'e'
+                    word: 'clasped', 
+                    meaning: 'Held tightly',
+                    initialLetters: [0, 4] // Show 'c' and 'p'
                 },
                 { 
-                    word: 'guffaw', 
-                    meaning: 'A loud and boisterous laugh',
-                    initialLetters: [0, 3] // Show 'g' and 'f'
+                    word: 'tension', 
+                    meaning: 'Mental or emotional strain',
+                    initialLetters: [0, 4] // Show 't' and 'i'
                 },
                 { 
-                    word: 'trudge', 
-                    meaning: 'To walk slowly and with heavy steps',
-                    initialLetters: [0, 3] // Show 't' and 'd'
+                    word: 'gulp', 
+                    meaning: 'To swallow quickly or in large amounts',
+                    initialLetters: [0, 2] // Show 'g' and 'l'
                 },
                 { 
-                    word: 'blurt', 
-                    meaning: 'To say something suddenly and without thinking',
-                    initialLetters: [0, 2] // Show 'b' and 'u'
+                    word: 'slumps', 
+                    meaning: 'Falls or sinks heavily',
+                    initialLetters: [0, 3] // Show 's' and 'm'
                 },
                 { 
-                    word: 'sullen', 
-                    meaning: 'Gloomy or silently moody',
-                    initialLetters: [0, 3] // Show 's' and 'l'
+                    word: 'mumble', 
+                    meaning: 'To speak quietly and unclearly',
+                    initialLetters: [0, 3] // Show 'm' and 'b'
                 },
                 { 
-                    word: 'clench', 
-                    meaning: 'To close tightly, especially the hands or teeth',
-                    initialLetters: [0, 4] // Show 'c' and 'n'
+                    word: 'disqualified', 
+                    meaning: 'Declared ineligible for a competition or activity',
+                    initialLetters: [0, 5] // Show 'd' and 'a'
                 },
                 { 
-                    word: 'fiasco', 
-                    meaning: 'A complete and embarrassing failure',
-                    initialLetters: [0, 3] // Show 'f' and 's'
+                    word: 'deceit', 
+                    meaning: 'The act of deceiving or lying',
+                    initialLetters: [0, 3] // Show 'd' and 'e'
                 },
                 { 
-                    word: 'crescents', 
-                    meaning: 'Shapes resembling a curved moon',
-                    initialLetters: [0, 4] // Show 'c' and 'c'
+                    word: 'fumble', 
+                    meaning: 'To handle something clumsily',
+                    initialLetters: [0, 3] // Show 'f' and 'b'
                 },
                 { 
-                    word: 'flourishes', 
-                    meaning: 'Bold or extravagant gestures or actions',
-                    initialLetters: [0, 5] // Show 'f' and 'i'
+                    word: 'battering', 
+                    meaning: 'Striking repeatedly with force',
+                    initialLetters: [0, 5] // Show 'b' and 'r'
                 },
                 { 
-                    word: 'grimace', 
-                    meaning: 'A facial expression showing pain or disgust',
-                    initialLetters: [0, 4] // Show 'g' and 'a'
+                    word: 'hems', 
+                    meaning: 'Edges of a piece of cloth that are folded and sewn',
+                    initialLetters: [0, 2] // Show 'h' and 'm'
                 },
                 { 
-                    word: 'muff', 
-                    meaning: 'To handle something clumsily or fail to do it properly',
-                    initialLetters: [0, 2] // Show 'm' and 'f'
+                    word: 'sludge', 
+                    meaning: 'Thick, soft, wet mud or a similar substance',
+                    initialLetters: [0, 3] // Show 's' and 'd'
                 },
                 { 
-                    word: 'surges', 
-                    meaning: 'Sudden powerful forward or upward movements',
-                    initialLetters: [0, 3] // Show 's' and 'g'
+                    word: 'blitz', 
+                    meaning: 'A sudden, intense attack or effort',
+                    initialLetters: [0, 2] // Show 'b' and 'i'
                 },
                 { 
-                    word: 'waver', 
-                    meaning: 'To be undecided or to shake slightly',
-                    initialLetters: [0, 2] // Show 'w' and 'v'
+                    word: 'sickly', 
+                    meaning: 'Unhealthy or pale in appearance',
+                    initialLetters: [0, 3] // Show 's' and 'k'
                 },
                 { 
-                    word: 'linger', 
-                    meaning: 'To stay in a place longer than necessary',
-                    initialLetters: [0, 3] // Show 'l' and 'g'
+                    word: 'ruffles', 
+                    meaning: 'To disturb the smoothness or calmness of something',
+                    initialLetters: [0, 3] // Show 'r' and 'f'
+                },
+                { 
+                    word: 'slant', 
+                    meaning: 'To slope or lean in a particular direction',
+                    initialLetters: [0, 3] // Show 's' and 'a'
+                },
+                { 
+                    word: 'bustling', 
+                    meaning: 'Full of energetic and noisy activity',
+                    initialLetters: [0, 4] // Show 'b' and 'l'
+                },
+                { 
+                    word: 'scoffs', 
+                    meaning: 'Speaks to someone in a mocking way',
+                    initialLetters: [0, 3] // Show 's' and 'f'
+                },
+                { 
+                    word: 'shanked', 
+                    meaning: 'In sports, to hit something incorrectly or off-target',
+                    initialLetters: [0, 4] // Show 's' and 'k'
+                },
+                { 
+                    word: 'soggy', 
+                    meaning: 'Wet and soft',
+                    initialLetters: [0, 2] // Show 's' and 'g'
+                },
+                { 
+                    word: 'miserable', 
+                    meaning: 'Very unhappy or uncomfortable',
+                    initialLetters: [0, 5] // Show 'm' and 'a'
+                },
+                { 
+                    word: 'somber', 
+                    meaning: 'Serious, gloomy, or dark in tone',
+                    initialLetters: [0, 3] // Show 's' and 'b'
+                },
+                { 
+                    word: 'flicker', 
+                    meaning: 'To shine or burn unsteadily',
+                    initialLetters: [0, 4] // Show 'f' and 'k'
+                },
+                { 
+                    word: 'jostling', 
+                    meaning: 'Pushing or shoving in a crowd',
+                    initialLetters: [0, 4] // Show 'j' and 'l'
+                },
+                { 
+                    word: 'contagious', 
+                    meaning: 'Able to be spread from one person to another',
+                    initialLetters: [0, 6] // Show 'c' and 'i'
                 }
             ],
             currentWordIndex: 0,
