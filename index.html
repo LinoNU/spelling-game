@@ -281,7 +281,7 @@
         
         <div class="score-board">
             <div>Score: <span id="score">0</span></div>
-            <div>Words Left: <span id="wordsLeft">26</span></div>
+            <div>Words Left: <span id="wordsLeft">7</span></div>
             <div>Hints Used: <span id="hintsUsed">0</span></div>
         </div>
 
@@ -326,134 +326,39 @@
         const GameState = {
             words: [
                 { 
-                    word: 'wobbles', 
-                    meaning: 'Moves unsteadily from side to side',
-                    initialLetters: [0, 4] // Show 'w' and 'l'
+                    word: 'rumpled', 
+                    meaning: 'Messy or wrinkled',
+                    initialLetters: [0, 4] // Show 'r' and 'l'
                 },
                 { 
-                    word: 'exaggeration', 
-                    meaning: 'Making something seem more important or worse than it really is',
-                    initialLetters: [0, 6] // Show 'e' and 'r'
+                    word: 'sputtering', 
+                    meaning: 'Making short uneven sounds like struggling to work or someone when upset',
+                    initialLetters: [0, 5] // Show 's' and 'e'
                 },
                 { 
-                    word: 'clasped', 
-                    meaning: 'Held tightly',
-                    initialLetters: [0, 4] // Show 'c' and 'p'
+                    word: 'scrawling', 
+                    meaning: 'Writing something quickly and messily',
+                    initialLetters: [0, 4] // Show 's' and 'w'
                 },
                 { 
-                    word: 'tension', 
-                    meaning: 'Mental or emotional strain',
-                    initialLetters: [0, 4] // Show 't' and 'i'
+                    word: 'eternity', 
+                    meaning: 'A very long time that feels like it will never end',
+                    initialLetters: [0, 5] // Show 'e' and 'i'
                 },
                 { 
-                    word: 'gulp', 
-                    meaning: 'To swallow quickly or in large amounts',
-                    initialLetters: [0, 2] // Show 'g' and 'l'
+                    word: 'apprehension', 
+                    meaning: 'A nervous or uneasy feeling about something that might happen',
+                    initialLetters: [0, 6] // Show 'a' and 'h'
                 },
                 { 
-                    word: 'slumps', 
-                    meaning: 'Falls or sinks heavily',
-                    initialLetters: [0, 3] // Show 's' and 'm'
+                    word: 'beckons', 
+                    meaning: 'To call or signal',
+                    initialLetters: [0, 4] // Show 'b' and 'o'
                 },
                 { 
-                    word: 'mumble', 
-                    meaning: 'To speak quietly and unclearly',
-                    initialLetters: [0, 3] // Show 'm' and 'b'
-                },
-                { 
-                    word: 'disqualified', 
-                    meaning: 'Declared ineligible for a competition or activity',
-                    initialLetters: [0, 5] // Show 'd' and 'a'
-                },
-                { 
-                    word: 'deceit', 
-                    meaning: 'The act of deceiving or lying',
-                    initialLetters: [0, 3] // Show 'd' and 'e'
-                },
-                { 
-                    word: 'fumble', 
-                    meaning: 'To handle something clumsily',
-                    initialLetters: [0, 3] // Show 'f' and 'b'
-                },
-                { 
-                    word: 'battering', 
-                    meaning: 'Striking repeatedly with force',
-                    initialLetters: [0, 5] // Show 'b' and 'r'
-                },
-                { 
-                    word: 'hems', 
-                    meaning: 'Edges of a piece of cloth that are folded and sewn',
-                    initialLetters: [0, 2] // Show 'h' and 'm'
-                },
-                { 
-                    word: 'sludge', 
-                    meaning: 'Thick, soft, wet mud or a similar substance',
-                    initialLetters: [0, 3] // Show 's' and 'd'
-                },
-                { 
-                    word: 'blitz', 
-                    meaning: 'A sudden, intense attack or effort',
-                    initialLetters: [0, 2] // Show 'b' and 'i'
-                },
-                { 
-                    word: 'sickly', 
-                    meaning: 'Unhealthy or pale in appearance',
-                    initialLetters: [0, 3] // Show 's' and 'k'
-                },
-                { 
-                    word: 'ruffles', 
-                    meaning: 'To disturb the smoothness or calmness of something',
-                    initialLetters: [0, 3] // Show 'r' and 'f'
-                },
-                { 
-                    word: 'slant', 
-                    meaning: 'To slope or lean in a particular direction',
-                    initialLetters: [0, 3] // Show 's' and 'a'
-                },
-                { 
-                    word: 'bustling', 
-                    meaning: 'Full of energetic and noisy activity',
-                    initialLetters: [0, 4] // Show 'b' and 'l'
-                },
-                { 
-                    word: 'scoffs', 
-                    meaning: 'Speaks to someone in a mocking way',
-                    initialLetters: [0, 3] // Show 's' and 'f'
-                },
-                { 
-                    word: 'shanked', 
-                    meaning: 'In sports, to hit something incorrectly or off-target',
-                    initialLetters: [0, 4] // Show 's' and 'k'
-                },
-                { 
-                    word: 'soggy', 
-                    meaning: 'Wet and soft',
-                    initialLetters: [0, 2] // Show 's' and 'g'
-                },
-                { 
-                    word: 'miserable', 
-                    meaning: 'Very unhappy or uncomfortable',
-                    initialLetters: [0, 5] // Show 'm' and 'a'
-                },
-                { 
-                    word: 'somber', 
-                    meaning: 'Serious, gloomy, or dark in tone',
-                    initialLetters: [0, 3] // Show 's' and 'b'
-                },
-                { 
-                    word: 'flicker', 
-                    meaning: 'To shine or burn unsteadily',
-                    initialLetters: [0, 4] // Show 'f' and 'k'
-                },
-                { 
-                    word: 'jostling', 
-                    meaning: 'Pushing or shoving in a crowd',
-                    initialLetters: [0, 4] // Show 'j' and 'l'
-                },
-                { 
-                    word: 'contagious', 
-                    meaning: 'Able to be spread from one person to another',
-                    initialLetters: [0, 6] // Show 'c' and 'i'
+                    word: 'amble', 
+                    meaning: 'To walk in a slow or relaxed way',
+                    initialLetters: [0, 3] // Show 'a' and 'l'
                 }
             ],
             currentWordIndex: 0,
